@@ -19,7 +19,7 @@ type Litt struct {
 }
 
 func (t Litt) eval(e Env) (int, error) {
-	return t.value,nil
+	return t.value, nil
 }
 
 type Var struct {
@@ -28,32 +28,43 @@ type Var struct {
 
 func (t Var) eval(e Env) (int, error) {
 	value, ok := e[t.name]
-	if ok { return value,nil }
-	return 0.0,EvalError{text:"Unknown variable " + t.name}
+	if ok {
+		return value, nil
+	} else {
+		return 0.0, EvalError{text: "Unknown variable " + t.name}
+	}
 }
 
 type Plus struct {
-	left Node
+	left  Node
 	right Node
 }
 
 func (t Plus) eval(e Env) (int, error) {
-	lvalue,err := t.left.eval(e)
-	if err != nil { return 0.0, err }
-	rvalue,err := t.right.eval(e)
-	if err != nil { return 0.0, err }
-	return lvalue + rvalue,nil
+	lvalue, err := t.left.eval(e)
+	if err != nil {
+		return 0.0, err
+	}
+	rvalue, err := t.right.eval(e)
+	if err != nil {
+		return 0.0, err
+	}
+	return lvalue + rvalue, nil
 }
 
 type Mult struct {
-	left Node
+	left  Node
 	right Node
 }
 
 func (t Mult) eval(e Env) (int, error) {
-	lvalue,err := t.left.eval(e)
-	if err != nil { return 0.0, err }
-	rvalue,err := t.right.eval(e)
-	if err != nil { return 0.0, err }
+	lvalue, err := t.left.eval(e)
+	if err != nil {
+		return 0.0, err
+	}
+	rvalue, err := t.right.eval(e)
+	if err != nil {
+		return 0.0, err
+	}
 	return lvalue * rvalue, nil
 }

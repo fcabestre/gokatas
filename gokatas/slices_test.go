@@ -1,4 +1,5 @@
 package gokatas
+
 import (
 	"testing"
 )
@@ -168,9 +169,11 @@ func modifyArray4(a []string) []string {
 }
 
 func compareSliceAndSubArray5(ss []string, start int, a [5]string) bool {
-	if len(ss) == len(a) - start {
+	if len(ss) == len(a)-start {
 		for i, s := range ss {
-			if s != a[i + start] { return false }
+			if s != a[i+start] {
+				return false
+			}
 		}
 		return true
 	}
